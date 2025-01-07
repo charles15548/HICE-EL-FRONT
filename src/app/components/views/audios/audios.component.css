@@ -1,0 +1,20 @@
+.audio-form {
+    margin-bottom: 20px;
+  }
+  
+  .audio-form form div {
+    margin-bottom: 10px;
+  }
+  
+  .audio-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .audio-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  

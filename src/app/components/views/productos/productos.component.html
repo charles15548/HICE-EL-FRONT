@@ -1,0 +1,109 @@
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="col-12 btn-agregar">
+      <button type="submit" class="btn btn-danger" (click)="logout()">
+          Cerrar sesion
+      </button>
+  </div>
+  </div>
+    <div class="row p-5">
+        <div class="col-12">
+            <div class="row section-banner">
+                <div class="col-6">
+                    <h2>Listado de Productos Por borrar</h2>
+                </div>
+                <div class="col-6 btn-agregar">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProducto"
+                        (click)="titulo('Crear', null)">
+                        Nuevo producto
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Disponible</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Eliminarddddddddddddd</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let lista of listaProductos; index as i">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{lista.descripcion}}</td>
+                        <td>{{lista.cantidad}} und.</td>
+                        <td>S/ {{lista.precio}}</td>
+                        <td>{{lista.enable === 'S' ? 'Si' : 'No'}}</td>
+                        <td>
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="#modalProducto" (click)="titulo('Editar', lista.id)">
+                                Editar
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" (click)="eliminarProductos(lista.id)">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <form [formGroup]="formProducto">
+        <div class="modal fade" id="modalProducto">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{title}}</h5>
+                        <button type="button" class="btn-close" (click)="cerrarBoton()"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" placeholder="Descripcion"
+                                        formControlName="descripcion" required>
+                                    <label for="Descripcion">Descripcion</label>
+
+                                </div>
+                                <div class="form-floating">
+                                    <input type="number" class="form-control" placeholder="Cantidad"
+                                        formControlName="cantidad">
+                                    <label for="Cantidad">Cantidad</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" placeholder="Precio"
+                                        formControlName="precio">
+                                    <label for="Precio">Precio</label>
+                                </div>
+                                <div class="form-floating">
+                                    <select class="form-select" formControlName="enable">
+                                        <option selected>Estado</option>
+                                        <option value="S">Disponible</option>
+                                        <option value="N">No disponible</option>
+                                    </select>
+                                    <label for="floatingSelect">Estado</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="cerrarBoton()">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" (click)="crearEditarProducto(nameBoton)">{{nameBoton}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

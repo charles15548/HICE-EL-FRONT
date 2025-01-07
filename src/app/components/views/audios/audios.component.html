@@ -1,0 +1,113 @@
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-12 btn-agregar">
+            <button type="submit" class="btn btn-danger" (click)="logout()">
+                Cerrar sesion
+            </button>
+        </div>
+    </div>
+    <div class="row p-5">
+        <div class="col-12">
+            <div class="row section-banner">
+                <div class="col-6">
+                    <h2>Listado de Audios Prueba</h2>
+                </div>
+                <div class="col-6 btn-agregar">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAudio"
+                        (click)="titulo('Crear',null)">
+                        Nuevo Audio
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Audio</th>
+                        <th scope="col">ID Usuario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let lista of listaAudios; index as i">
+                        <th scope="row">{{i + 1}}</th>
+                        <td>{{lista.nombre}}</td>
+                        <td>{{lista.descripcion}}</td>
+                        <td>
+                            <audio controls>
+                                <source [src]="'http://localhost:8090/Archivo/Voz/'+ lista.voz" type="audio/mpeg">
+                            </audio>
+                        </td>
+                        <td>{{lista.idPersonaje}}</td>
+                        <td>
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="#modalAudio" (click)="titulo('Editar', lista.idAudio)">
+                                Editar
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" (click)="eliminarAudio(lista.idAudio)">
+                            Eliminar
+                           </button>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+
+    <form [formGroup]="formAudios">
+        <div class="modal fade" id="modalAudio">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{title}}</h5>
+                        <button type="button" class="btn-close" (click)="cerrarBoton()"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" placeholder="Nombre"
+                                        formControlName="nombre" required>
+                                    <label for="nombre">Nombre</label>
+
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" placeholder="Descripcion"
+                                        formControlName="descripcion" required>
+                                    <label for="Descripcion">Descripcion</label>
+
+                                </div>
+
+                                
+                            </div>
+                            <div class="col-6">
+                                <div>
+                                    <label for="formFileLg" class="form-label">Audio</label>
+                                    <input class="form-control form-control-lg" id="audioFile" type="file"
+                                        (change)="onFileSelected($event)" >
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="cerrarBoton()">Cerrar</button>
+                        <button type="submit" class="btn btn-primary"
+                            (click)="crearEditarAudio(nameBoton)">{{nameBoton}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
