@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {  ActivatedRoute, Router } from '@angular/router';
 import { PersonajesService } from 'src/app/services/personajes.service';
 
 @Component({
@@ -13,22 +13,24 @@ export class PersonajesComponent implements OnInit {
     audioFile: File | null = null;
     title: any
     nameBoton: any  
-  
+    idProyecto : number = +this.router.snapshot.paramMap.get('idProyecto')!;
+
     constructor(
       private _personajesService: PersonajesService,
       private route: Router,
+      private router: ActivatedRoute,
     ) { }
   
     ngOnInit(): void {
-      this.obtenerPersonaje()
+      this.obtenerPorProyecto(this.idProyecto)
       
     }
-    verPersonaje(idPersonaje: number) {
+    verAudios(idPersonaje: number) {
       this.route.navigate(['/audios', idPersonaje]);
     }
      
-    obtenerPersonaje(){
-      this._personajesService.listarPersonajes()
+    obtenerPorProyecto(idProyecto: number){
+      this._personajesService.listarPorProyecto(idProyecto)
       .subscribe((data)=>{
         this.listaPersonajes = data.Personaje;
         console.log(data.Personaje)

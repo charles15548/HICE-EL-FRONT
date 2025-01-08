@@ -11,6 +11,7 @@ import { AuthInterceptor } from './components/helpers/auth.interceptor';
 import { AuthGuard } from './components/helpers/auth.guard';
 import { AudiosComponent } from './components/views/audios/audios.component';
 import { PersonajesComponent } from './components/views/personajes/personajes.component';
+import { ProyectosComponent } from './components/views/proyectos/proyectos.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { PersonajesComponent } from './components/views/personajes/personajes.co
     LoginComponent,
     AudiosComponent,
     PersonajesComponent,
+    ProyectosComponent,
   ],
   imports: [
     HttpClientModule,
@@ -30,7 +32,8 @@ import { PersonajesComponent } from './components/views/personajes/personajes.co
       {path: 'productos', component: ProductosComponent, canActivate: [AuthGuard]},
       {path: 'audios', component: AudiosComponent, canActivate: [AuthGuard]},
       {path: 'audios/:idPersonaje', component: AudiosComponent, canActivate: [AuthGuard]},
-      {path: 'personaje', component: PersonajesComponent, canActivate: [AuthGuard]},
+      {path: 'personajes/:idProyecto', component: PersonajesComponent, canActivate: [AuthGuard]},
+      {path: 'proyectos', component: ProyectosComponent, canActivate:[AuthGuard]},
       {path: 'login', component: LoginComponent},
       {path: '', component: LoginComponent},
     ]),

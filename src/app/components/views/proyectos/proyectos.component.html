@@ -1,0 +1,23 @@
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let lista of listaProyectos; index as i">
+                <th>{{i+1}}</th>
+                <th>{{lista.nombre}}</th>
+                <th>{{lista.descripcion}}</th>
+                <th>
+                    <button class="btn btn-success" (click)="verPersonajes(lista.idProyecto)">
+                        Ir a Personaje
+                    </button>
+                </th>
+            </tr>
+        </tbody>
+    </table>
+</div>
