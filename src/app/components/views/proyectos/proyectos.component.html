@@ -1,23 +1,89 @@
 <div>
+    <button type="button" class="btn.btn-primary" data-bs-toggle="modal" data-bs-target="#modalProyecto"
+        (click)="titulo('Crear',null)">
+        Nuevo Proyecto
+    </button>
+</div>
+<div>
     <table>
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th>Nombre</th>
-                <th>Descripcion</th>
+                <th  scope="col">Nombre </th>
+                <th scope="col">Descripcion </th>
+                <th scope="col">Imagen</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let lista of listaProyectos; index as i">
                 <th>{{i+1}}</th>
-                <th>{{lista.nombre}}</th>
-                <th>{{lista.descripcion}}</th>
-                <th>
+                <td>{{lista.nombre}}</td>
+                <td>{{lista.descripcion}}</td>
+                
+                <td>
+                    <img 
+                      [src]="'http://localhost:8090/Archivo/Proyecto/' + lista.imgProyecto" 
+                      alt="Imagen del proyecto" 
+                      style="width: 200px; height: auto;">
+                  </td>
+                
+                <td>
                     <button class="btn btn-success" (click)="verPersonajes(lista.idProyecto)">
                         Ir a Personaje
                     </button>
-                </th>
+                </td>
             </tr>
         </tbody>
     </table>
 </div>
+
+
+
+    <!-- Modal -->
+
+    <form [formGroup]="formProyecto">
+        <div class="modal fade" id="modalProyecto">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{title}}</h5>
+                        <button type="button" class="btn-close" (click)="cerrarBoton()"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" placeholder="Nombre"
+                                        formControlName="nombre" required>
+                                    <label for="nombre">Nombre</label>
+
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" placeholder="Descripcion"
+                                        formControlName="descripcion" required>
+                                    <label for="Descripcion">Descripcion</label>
+
+                                </div>
+
+                                
+                            </div>
+                            <div class="col-6">
+                                <div>
+                                    <label for="formFileLg" class="form-label">Img</label>
+                                    <input class="form-control form-control-lg" id="proyectoFile" type="file"
+                                        (change)="onFileSelected($event)" >
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="cerrarBoton()">Cerrar</button>
+                        <button type="submit" class="btn btn-primary"
+                            (click)="crearEditarProyecto(nameBoton)">{{nameBoton}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>

@@ -17,7 +17,7 @@ export class ProyectosService {
   listarProyectos(): Observable<any>{
     return this.http.get(this.proyecto)
   }
-/*
+
   listarPorUsuario(id : number):  Observable<any>{
     return this.http.get(`${this.proyecto}/usuario/${id}`)
   }
@@ -25,10 +25,10 @@ export class ProyectosService {
     return this.http.get(`${this.proyecto}/${id}`)
   }
 
-  generarAudios(fromData: FormData): Observable<any> {
-    return this.http.post(`${this.audios}`, fromData)
+  generarProyecto(fromData: FormData): Observable<any> {
+    return this.http.post(`${this.proyecto}`, fromData)
   }
-
+/*
   editarAudio(id: number, fromData: FormData): Observable<any> {
   
     return this.http.put(`${this.audios}/${id}`, fromData);
