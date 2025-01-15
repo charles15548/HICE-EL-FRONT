@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProyectosService } from 'src/app/services/proyectos.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 import Swal from 'sweetalert2';
 declare var bootstrap: any;
 @Component({
@@ -12,8 +13,8 @@ declare var bootstrap: any;
 export class ProyectosComponent implements OnInit {
 
   listaProyectos: any[] =[]
-  proyectoFile : File | null= null;
   formProyecto:FormGroup
+  proyectoFile : File | null= null;
   title:any
   nameBoton: any
   id: number
@@ -22,11 +23,14 @@ export class ProyectosComponent implements OnInit {
 
   constructor( 
     private _proyectosService: ProyectosService,
+    private _usuariosService: UsuariosService,
     private route: Router,){} 
 
   ngOnInit(): void {
-    this.obtenerProyectos()
     this.initForm()
+    this.obtenerProyectos()
+    this.obtenerUsuarioPorLogueado()
+   
   }
 
   initForm(){
@@ -38,6 +42,14 @@ export class ProyectosComponent implements OnInit {
   verPersonajes(idProyecto: number){
     this.route.navigate(['/personajes',idProyecto])
   }
+  obtenerUsuarioPorLogueado(){
+    this._usuariosService.listarUsuarioLogueado()
+    .subscribe((data)=>{
+      console.log(data.Usuario)
+    },(error)=>{
+      console.error('Error al obtener Usuario',error);
+    });
+  }
 
   obtenerProyectos(){
     this._proyectosService.listarProyectos()
@@ -46,6 +58,37 @@ export class ProyectosComponent implements OnInit {
       console.log(data.Proyecto)
     },(error)=>{
       console.error('Error al obtener proyectos: ', error);
+    });
+  }
+  obtenerProyectoPorId(id:any){
+    let form = this.formProyecto
+    this._proyectosService.obtenerProyectoPorId(id).subscribe((data)=>{
+      form.controls['nombre'].setValue(data.Proyecto.nombre)
+      form.controls['descripcion'].setValue(data.Proyecto.descripcion)
+
+      this.proyectoFile=null;
+    })
+  }
+
+  eliminarProyecto(id: any){
+    Swal.fire({
+      title: '¿Estás seguro de eliminar el proyecto?',
+      icon: 'error',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result)=>{
+      if(result.isConfirmed){
+        this._proyectosService.eliminar(id)
+        .subscribe((data)=>{
+          console.log("Audio eliminado", data)
+          this.listaProyectos = this.listaProyectos.filter(item => item.id !==id);
+
+        },error=>{
+          console.error('Error al eliminar proyecto', error);
+        });
+        this.alertaExitosa("Eliminado")
+      }
     });
   }
 
@@ -78,13 +121,31 @@ export class ProyectosComponent implements OnInit {
 
   }
 
+  editarProyecto(id: number):void{
+    if(this.formProyecto.valid){
+      //Obtiene todo el formulario
+      let audioData = {
+        nombre: this.formProyecto.get('nombre')?.value,
+        descripcion: this.formProyecto.get('descripcion')?.value
+      };
+      this.formData.append('proyectoParam', JSON.stringify(audioData));
+      this._proyectosService.editar(id,this.formData ).subscribe(response=>{
+        this.cerrarModal()
+        this.obtenerProyectos()
+        this.resetForm()
+        console.log('Actualizado correctamente',response);
+      },error=>{
+        console.error('Error en la modificación',error);
+      });
+    }
+  }
   titulo(titulo:any, id:number){
     this.title = `${titulo} proyecto`
     titulo == "Crear" ? this.nameBoton= "Guardar" : this.nameBoton = "Modificar"
 
     if(id!= null){
       this.id = id
-      // this.obtenerProyectosPorId(id)
+      this.obtenerProyectoPorId(id)
     }
   }
 
@@ -92,7 +153,7 @@ export class ProyectosComponent implements OnInit {
     if(boton == "Guardar"){
       this.alertaRegistro()
     }else{
-
+      this.alertModificar()
     }
   }
   cerrarModal(){
@@ -132,6 +193,23 @@ export class ProyectosComponent implements OnInit {
         })
       }
     }
+
+     alertModificar(){
+        if(this.formProyecto.valid){
+          Swal.fire({
+            title: '¿Estás seguro de modificar el Proyecto?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, modificar',
+            cancelButtonText: 'Cancelar'
+          }).then((result)=>{
+            if(result.isConfirmed){
+              this.editarProyecto(this.id)
+              this.alertaExitosa('modificado')
+            }
+          });
+        }
+      }
     alertaExitosa(titulo:any){
         Swal.fire({
           position:"top-end",

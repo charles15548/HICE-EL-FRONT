@@ -1,5 +1,6 @@
+<app-mainheader></app-mainheader>
 <div>
-    <button type="button" class="btn.btn-primary" data-bs-toggle="modal" data-bs-target="#modalProyecto"
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProyecto"
         (click)="titulo('Crear',null)">
         Nuevo Proyecto
     </button>
@@ -33,6 +34,19 @@
                         Ir a Personaje
                     </button>
                 </td>
+                <td>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                    data-bs-target="#modalProyecto" (click)="titulo('Editar', lista.idProyecto)">
+                    Editar
+                </button>
+                </td>
+
+                
+                <td>
+                    <button class="btn btn-danger" (click)="eliminarProyecto(lista.idProyecto)">
+                    Eliminar
+                   </button>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -56,7 +70,7 @@
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" placeholder="Nombre"
                                         formControlName="nombre" required>
-                                    <label for="nombre">Nombre</label>
+                                    <label for="Nombre">Nombre</label>
 
                                 </div>
                                 <div class="form-floating mb-3">

@@ -18,6 +18,9 @@ export class AudiosService {
     return this.http.get(this.audios)
   }
 
+  listarPorProyectoYPersonaje(idProyecto : number, idPersonaje):  Observable<any>{
+    return this.http.get(`${this.audios}/proyecto/${idProyecto}/personaje/${idPersonaje}`)
+  }
   listarPorPersonaje(id : number):  Observable<any>{
     return this.http.get(`${this.audios}/personaje/${id}`)
   }

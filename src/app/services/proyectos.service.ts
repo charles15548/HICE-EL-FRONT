@@ -28,14 +28,14 @@ export class ProyectosService {
   generarProyecto(fromData: FormData): Observable<any> {
     return this.http.post(`${this.proyecto}`, fromData)
   }
-/*
-  editarAudio(id: number, fromData: FormData): Observable<any> {
+
+  editar(id: number, fromData: FormData): Observable<any> {
   
-    return this.http.put(`${this.audios}/${id}`, fromData);
+    return this.http.put(`${this.proyecto}/${id}`, fromData);
   }
 
-  eliminarAudio(id: number): Observable<any> {
-    return this.http.delete(`${this.audios}/${id}`);
-  }*/
+  eliminar(id: number): Observable<any> {
+    return this.http.delete(`${this.proyecto}/${id}`);
+  }
     
 }

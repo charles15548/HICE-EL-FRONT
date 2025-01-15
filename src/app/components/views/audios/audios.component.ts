@@ -23,6 +23,7 @@ export class AudiosComponent implements OnInit {
   id: number
   formData= new FormData() ;
   idPersonaje: number = +this.router.snapshot.paramMap.get('idPersonaje')!;
+  idProyecto: number = +this.router.snapshot.paramMap.get('idProyecto')!;
   //idPersonaje: number = 2;
 
   constructor(
@@ -33,7 +34,8 @@ export class AudiosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.obtenerAudiosPorPersonaje(this.idPersonaje)
+  
+    this.obtenerAudiosPorProyectoyPersonaje(this.idProyecto, this.idPersonaje)
     //this.obtenerAudios()
     this.initFrom()
    
@@ -44,13 +46,10 @@ export class AudiosComponent implements OnInit {
     this.formAudios = new FormGroup({
       nombre: new FormControl(null, [Validators.required]), 
       descripcion: new FormControl(null, [Validators.required]),
-    })
-
-
-     
+    }) 
   }
   
-    
+    /*
   obtenerAudios(){
     this._audioService.listarAudios()
     .subscribe((data)=>{
@@ -61,19 +60,20 @@ export class AudiosComponent implements OnInit {
       console.error('Error al obtener audios:', error);
     });
   }
-
-  obtenerAudiosPorPersonaje(idPersonaje: number){
-    this._audioService.listarPorPersonaje(idPersonaje)
+*/
+  obtenerAudiosPorProyectoyPersonaje(idProyecto: number, idPersonaje: number){
+    this._audioService.listarPorProyectoYPersonaje(idProyecto,idPersonaje)
     .subscribe((data)=>{
       this.listaAudios = data.Audio;
       console.log(data.Audio);
-      if(this.listaAudios.length==0){
-        console.log("No hay audios con dicho personaje");
+     if(this.listaAudios.length==0){
+        console.log("No hay audios con dicho proyecto y personaje");
       }
     }, (error)=>{
-      console.error('Error al obtener audios por personaje', error);
+      console.error('Error al obtener audios por proyecto y personaje', error);
     });
   }
+ 
     
     
   
@@ -121,14 +121,15 @@ export class AudiosComponent implements OnInit {
      //Obtiene todo el formulario
       let audioData = {
         nombre: this.formAudios.get('nombre')?.value,
-        descripcion: this.formAudios.get('descripcion')?.value
+        descripcion: this.formAudios.get('descripcion')?.value,
+        idPersonaje: this.idPersonaje
       };
 
       this.formData.append('audioParam', JSON.stringify(audioData));
      
         this._audioService.generarAudios(this.formData).subscribe(response=>{
         this.cerrarModal()
-        this.obtenerAudios()
+        this.obtenerAudiosPorProyectoyPersonaje(this.idProyecto,this.idPersonaje)
         this.resetForm()
         console.log('Audio Registrado',response);
       }, error =>{
@@ -157,7 +158,7 @@ export class AudiosComponent implements OnInit {
       this.formData.append('audioParam', JSON.stringify(audioData));
       this._audioService.editarAudio(id,this.formData ).subscribe(response=>{
         this.cerrarModal()
-        this.obtenerAudios()
+        this.obtenerAudiosPorProyectoyPersonaje(this.idProyecto,this.idPersonaje)
         this.resetForm()
         console.log('Audio actualizado',response);
       },error=>{

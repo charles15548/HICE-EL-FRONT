@@ -1,0 +1,37 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+<nav class="navbar navbar-expand-lg" id="navbar">
+    <div class="container">
+        <a class="navbar-brand" routerLink="/proyectos">
+            <strong><span class="brand-name">HICE</span></strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/proyectos">
+                        <i class="fas fa-plus-circle me-2"></i>Crear
+                    </a>
+                    
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img *ngIf="Usuario"
+                                     [src]="'http://localhost:8090/Archivo/Usuario/' + Usuario.imgUsuario" 
+                                     style="width: 50px; height: 50px; border-radius: 50%; margin-left: 10px;">
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" routerLink="/usuario"> <i class="fas fa-user-circle me-2"></i>Cuenta</a></li>
+                        <li><a class="dropdown-item" routerLink="/affiliate">Afiliación</a></li>
+                        <li><a class="dropdown-item" (click)="logout()" >
+                            <i class="fas fa-sign-out-alt me-2"></i>Salir  
+                        </a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

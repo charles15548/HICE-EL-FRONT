@@ -24,18 +24,18 @@ export class PersonajesService {
   obtenerPersonajePorId(id: number): Observable<any>{
     return this.http.get(`${this.personaje}/${id}`)
   }
-/*
-  generarAudios(fromData: FormData): Observable<any> {
-    return this.http.post(`${this.audios}`, fromData)
+
+  generarPersonaje(fromData: FormData): Observable<any> {
+    return this.http.post(`${this.personaje}`, fromData)
   }
 
-  editarAudio(id: number, fromData: FormData): Observable<any> {
+  editarPersonaje(id: number, fromData: FormData): Observable<any> {
   
-    return this.http.put(`${this.audios}/${id}`, fromData);
+    return this.http.put(`${this.personaje}/${id}`, fromData);
   }
 
-  eliminarAudio(id: number): Observable<any> {
-    return this.http.delete(`${this.audios}/${id}`);
-  }*/
+  eliminarPersonaje(id: number): Observable<any> {
+    return this.http.delete(`${this.personaje}/${id}`);
+  }
     
 }

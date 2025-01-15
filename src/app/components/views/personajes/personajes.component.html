@@ -1,9 +1,10 @@
 <div class="container">
     <br>
     <div class="row">
-        <div class="col-12 btn-agregar">
-           
-        </div>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPersonaje"
+        (click)="titulo('Crear',null)">
+        Nuevo Personaje
+    </button>
     </div>
     <div class="row p-5">
         <div class="col-12">
@@ -23,7 +24,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Descripcion</th>
-                        <th scope="col">Audio</th>
+                        <th scope="col">Img</th>
                         <th scope="col">ID Usuario</th>
                     </tr>
                 </thead>
@@ -32,6 +33,12 @@
                         <th scope="row">{{i + 1}}</th>
                         <td>{{lista.nombre}}</td>
                         <td>{{lista.descripcion}}</td>
+                        <td>
+                            <img 
+                              [src]="'http://localhost:8090/Archivo/Personaje/' + lista.imgPersonaje" 
+                              alt="Imagen del personaje" 
+                              style="width: 200px; height: auto;">
+                          </td>
                         
                        
                         <td>
@@ -39,6 +46,20 @@
                             Ir a Audio
                            </button>
                         </td>
+                        <td>
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                            data-bs-target="#modalPersonaje" (click)="titulo('Editar', lista.idPersonaje)">
+                            Editar
+                        </button>
+                        </td>
+        
+                        
+                        <td>
+                            <button class="btn btn-danger" (click)="eliminarPersonaje(lista.idPersonaje)">
+                            Eliminar
+                           </button>
+                        </td>
+
                     </tr>
                 </tbody>
 
@@ -48,3 +69,51 @@
 
 
 </div>
+
+ <!-- Modal -->
+
+ <form [formGroup]="formPersonaje">
+    <div class="modal fade" id="modalPersonaje">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{title}}</h5>
+                    <button type="button" class="btn-close" (click)="cerrarBoton()"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" placeholder="Nombre"
+                                    formControlName="nombre" required>
+                                <label for="Nombre">Nombre</label>
+
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" placeholder="Descripcion"
+                                    formControlName="descripcion" required>
+                                <label for="Descripcion">Descripcion</label>
+
+                            </div>
+
+                            
+                        </div>
+                        <div class="col-6">
+                            <div>
+                                <label for="formFileLg" class="form-label">Img</label>
+                                <input class="form-control form-control-lg" id="personajeFile" type="file"
+                                    (change)="onFileSelected($event)" >
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="cerrarBoton()">Cerrar</button>
+                    <button type="submit" class="btn btn-primary"
+                        (click)="crearEditarPersonaje(nameBoton)">{{nameBoton}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

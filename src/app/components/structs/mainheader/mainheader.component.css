@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+#navbar {
+    background-color: rgba(15, 32, 39, 0.9); /* Azul oscuro con transparencia */
+    z-index: 10;
+}
+
+.navbar .nav-link {
+    color: #f0c929 !important; /* Dorado */
+}
+
+.navbar .nav-link:hover {
+    color: #5cb85c !important; /* Verde suave */
+}
+
+.navbar-light .navbar-nav .nav-link {
+    font-family: 'Arial', sans-serif;
+    transition: color 0.3s ease;
+}
+
+.brand-name {
+    font-family: 'Satisfy', cursive;
+    font-size: 2rem;
+    color: #f0c929; /* Dorado */
+}
+
+.brand-name.express {
+    color: #ffffff; /* Blanco */
+}
+
+.brand-name:not(.express) {
+    color: #5cb85c; /* Verde suave */
+}
+
+/* Dropdown Styles */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    background-color: #f0f4f8; /* Azul claro */
+    border: none;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.dropdown-item {
+    color: #1a1a1a; /* Texto oscuro */
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    color: #f0c929; /* Dorado */
+    background-color: #e1ecf4; /* Azul claro */
+}
