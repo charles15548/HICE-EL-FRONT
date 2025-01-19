@@ -1,0 +1,82 @@
+<div class="container">
+  <h2>Registro de Usuario</h2>
+  <form [formGroup]="formRegistro" (ngSubmit)="registrarUsuario()">
+    <!-- Paso 1 -->
+    <div *ngIf="paso === 1">
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" id="nombre" class="form-control" formControlName="nombre" />
+      </div>
+      <div class="mb-3">
+        <label for="apellidoPaterno" class="form-label">Apellido Paterno</label>
+        <input type="text" id="apellidoPaterno" class="form-control" formControlName="apellidoPaterno" />
+      </div>
+      <div class="mb-3">
+        <label for="apellidoMaterno" class="form-label">Apellido Materno</label>
+        <input type="text" id="apellidoMaterno" class="form-control" formControlName="apellidoMaterno" />
+      </div>
+      <div class="mb-3">
+        <label for="formFileLg" class="form-label">Tu imagen</label>
+        <input class="form-control form-control-lg" id="usuarioFile" type="file"
+            (change)="onFileSelected($event)" >
+      </div>
+
+      <button type="button" class="btn btn-primary" (click)="cambiarPaso(2)">Siguiente</button>
+    </div>
+
+    <!-- Paso 2 -->
+    <div *ngIf="paso === 2">
+      <div class="mb-3">
+        <label for="email" class="form-label">Correo Electrónico</label>
+        <input type="email" id="email" class="form-control" formControlName="email" />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input type="password" id="password" class="form-control" formControlName="password" />
+      </div>
+      <button type="button" class="btn btn-primary" (click)="cambiarPaso(1)">Anterior</button>
+      <button type="button" class="btn btn-primary" (click)="cambiarPaso(3)">Siguiente</button>
+    </div>
+
+    <!-- Paso 3 -->
+    
+    <div  *ngIf="paso === 3">
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="edad" class="form-label">Edad</label>
+            <input type="number" id="edad" class="form-control" formControlName="edad" />
+          </div>
+          <div class="mb-3">
+            <label for="genero" class="form-label">Género</label>
+            <select id="genero" class="form-control" formControlName="genero">
+              <option value="M">Masculino</option>
+              <option value="F">Femenino</option>
+              <option value="O">Otro</option>
+            </select>
+          </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="idPais" class="form-label">País</label>
+              <select id="idPais" class="form-control" formControlName="idPais">
+                <option *ngFor="let pais of listaPaises" [value]="pais.idPais">{{ pais.nombre }}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="idDepartamento" class="form-label">País</label>
+              <select id="idDepartamento" class="form-control" formControlName="idDepartamento">
+                <option *ngFor="let pais of listaPaises" [value]="pais.idPais">{{ pais.nombre }}</option>
+              </select>
+            </div>
+          </div>
+          
+      </div>
+      
+      
+      
+      <button type="button" class="btn btn-primary" (click)="cambiarPaso(2)">Anterior</button>
+      <button type="submit" class="btn btn-success">Registrar</button>
+    </div>
+  </form>
+</div>

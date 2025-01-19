@@ -1,23 +1,24 @@
 <div class="container">
-
   <div class="login">
-    <h2>Inicio de sesion</h2>
+    <h2>Inicio de Sesión</h2>
     <form [formGroup]="formLogin">
       <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Correo electronico</label>
-        <input type="email" class="form-control" formControlName="email">
+        <label for="email" class="form-label">Correo electrónico</label>
+        <input type="email" id="email" class="form-control" formControlName="email" />
       </div>
       <div class="mb-3">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Contraseña</label>
-          <input type="password" class="form-control" formControlName="password">
+        <label for="password" class="form-label">Contraseña</label>
+        <input type="password" id="password" class="form-control" formControlName="password" />
       </div>
       <div class="mb-3">
-        <span><a href="#">¿Olvidaste tu contraseña?</a></span>
+        <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
       </div>
-        <div class="mb-3">
-          <button type="submit" class="btn btn-primary mb-3" (click)="login()">Ingresar</button>
-        </div>
+      <div class="mb-3">
+        <button type="submit" class="btn-primary" (click)="login()">Ingresar</button>
+      </div>
+      <div class="text-center">
+        <span class="texto">¿Aún no tienes una cuenta? <a routerLink="/usuario/registro" class="link-text">Regístrate</a></span>
+      </div>
     </form>
   </div>
-
 </div>

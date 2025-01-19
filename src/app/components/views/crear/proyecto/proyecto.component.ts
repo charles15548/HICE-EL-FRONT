@@ -6,11 +6,11 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 import Swal from 'sweetalert2';
 declare var bootstrap: any;
 @Component({
-  selector: 'app-proyectos',
-  templateUrl: './proyectos.component.html',
-  styleUrls: ['./proyectos.component.css']
+  selector: 'app-proyecto',
+  templateUrl: './proyecto.component.html',
+  styleUrls: ['./proyecto.component.css']
 })
-export class ProyectosComponent implements OnInit {
+export class ProyectoComponent implements OnInit {
 
   listaProyectos: any[] =[]
   formProyecto:FormGroup

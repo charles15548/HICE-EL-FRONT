@@ -39,7 +39,7 @@ export class PersonajesComponent implements OnInit {
       }
     
     verAudios(idPersonaje: number) {
-      this.route.navigate(['/audios/proyecto', this.idProyecto, 'personaje', idPersonaje]);
+      this.route.navigate(['/proyectos', this.idProyecto,'personajes', idPersonaje,'audios']);
     }
     obtenerPersonajes(){
       this._personajesService.listarPersonajes()

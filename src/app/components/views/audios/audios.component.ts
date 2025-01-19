@@ -198,7 +198,7 @@ export class AudiosComponent implements OnInit {
 
     const fileInput = document.getElementById('audioFile') as HTMLInputElement;
     if( fileInput){
-      fileInput. value = '';
+      fileInput.value = '';
     }
     
   }

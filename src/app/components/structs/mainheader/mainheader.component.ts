@@ -20,7 +20,20 @@ export class MainheaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.obtenerUsuarioPorLogueado()
+   
+    //const idUsuario = this._loginService.ObtenerIdUsuarioLogueado();
+    //this.obtenerUsuarioPorId(idUsuario);
+    this.obtenerUsuarioPorLogueado();
+  }
+
+  obtenerUsuarioPorId(id: any){
+    this._usuariosService.listarUsuarioPorId(id)
+    .subscribe((data)=>{
+      this.Usuario = data.Usuario;
+      console.log(data.Usuario)
+    },(error)=>{
+      console.error('Error al obtener Usuario por id',error);
+    });
   }
   obtenerUsuarioPorLogueado(){
     this._usuariosService.listarUsuarioLogueado()

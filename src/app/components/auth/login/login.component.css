@@ -1,10 +1,118 @@
-.login{
-  width: 50%;
-  padding-top: 200px;
-  margin: auto;
+
+
+/* Contenedor Principal */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
 }
 
-.login h2{
+/* Caja de Login */
+.login {
+  background: #2c2c3a;
+  padding: 40px 50px;
+  border-radius: 15px;
+  border: 2px solid #00c853; /* Borde verde brillante */
+  box-shadow: 0 8px 15px rgba(0, 200, 83, 0.3); /* Sombra verde */
   text-align: center;
-  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Título */
+.login h2 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #c1a034; /* Dorado para el título */
+  margin-bottom: 20px;
+}
+
+.login h2::after {
+  content: '';
+  display: block;
+  width: 51px;
+  height: 3px;
+  background: #12a851;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+/* Etiquetas */
+.form-label {
+  font-weight: bold;
+  color: #e0e0e0; /* Texto claro */
+  margin-bottom: 8px;
+  display: block;
+  text-align: left;
+}
+
+/* Inputs */
+.form-control {
+  border: 2px solid #3a3a4a; /* Borde gris oscuro */
+  background: #262626; /* Fondo oscuro para inputs */
+  color: #e0e0e0; /* Texto claro */
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  border-color: #00c853; /* Borde verde al enfocar */
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 200, 83, 0.5); /* Sombra verde brillante */
+}
+
+/* Enlace "Olvidaste tu contraseña" */
+.forgot-link {
+  color: #b59630; /* Dorado */
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.forgot-link:hover {
+  color: #1da756; /* Verde al pasar el mouse */
+  text-decoration: underline;
+}
+
+/* Botón */
+.btn-primary {
+  background-color: #0da74d; 
+  border: none;
+  color: #121212; /* Texto oscuro */
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 0;
+  border-radius: 10px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #09b64e; /* Verde más oscuro */
+  box-shadow: 0 0 10px rgba(0, 183, 76, 0.6); /* Efecto de brillo verde */
+}
+
+/* Sombra General */
+.login {
+  border: 1px solid #d4af37;
+  box-shadow: 0 6px 15px rgba(212, 175, 55, 0.3); /* Sombra dorada */
+}
+.texto{
+  color: #e0e0e0;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .login {
+    padding: 20px 30px;
+    border-radius: 10px;
+  }
+
+  .login h2 {
+    font-size: 22px;
+  }
 }

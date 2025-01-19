@@ -14,7 +14,9 @@ import { PersonajesComponent } from './components/views/personajes/personajes.co
 import { ProyectosComponent } from './components/views/proyectos/proyectos.component';
 import { MainheaderComponent } from './components/structs/mainheader/mainheader.component';
 import { MainfooterComponent } from './components/structs/mainfooter/mainfooter.component';
-
+import { RegisterComponent } from './components/auth/register/register.component';
+import { ProyectoComponent } from './components/views/crear/proyecto/proyecto.component';
+import { ExplorarProyectosComponent } from './components/views/explorar/explorar-proyectos/explorar-proyectos.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,9 @@ import { MainfooterComponent } from './components/structs/mainfooter/mainfooter.
     ProyectosComponent,
     MainheaderComponent,
     MainfooterComponent,
+    RegisterComponent,
+    ProyectoComponent,
+    ExplorarProyectosComponent,
   ],
   imports: [
     HttpClientModule,
@@ -33,21 +38,21 @@ import { MainfooterComponent } from './components/structs/mainfooter/mainfooter.
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      {path: 'productos', component: ProductosComponent, canActivate: [AuthGuard]},
-      {path: 'audios', component: AudiosComponent, canActivate: [AuthGuard]},
-      {path: 'audios/proyecto/:idProyecto/personaje/:idPersonaje', component: AudiosComponent, canActivate: [AuthGuard]},
-      {path: 'personajes/:idProyecto', component: PersonajesComponent, canActivate: [AuthGuard]},
-      {path: 'proyectos', component: ProyectosComponent, canActivate:[AuthGuard]},
+      /**/ 
       {path: 'login', component: LoginComponent},
       {path: '', component: LoginComponent},
+      /* vista del creador*/ 
+      {path: 'proyecto/:idUsuario/crear', component: ProyectoComponent, canActivate:[AuthGuard]},
+      {path: 'proyecto/:idUsuario/personaje/:idProyecto/crear', component: PersonajesComponent, canActivate:[AuthGuard]},
+      {path: 'proyecto/:idUsuario/personaje/:idProyecto/audio/:idPersonaje/crear', component: AudiosComponent, canActivate:[AuthGuard]},
 
-      {path: 'proyectos/:idUsuario/crear', component: ProyectosComponent, canActivate:[AuthGuard]},
-      {path: 'proyectos/:idUsuario/personajes/:idProyecto/crear', component: PersonajesComponent, canActivate:[AuthGuard]},
-      {path: 'proyectos/:idUsuario/personajes/:idProyecto/audios/:idPersonaje/crear', component: AudiosComponent, canActivate:[AuthGuard]},
+      /* vista del oyente*/ 
+      {path: 'proyectos', component: ExplorarProyectosComponent, canActivate:[AuthGuard]},
+      {path: 'proyectos/personajes/:idProyecto', component: PersonajesComponent, canActivate:[AuthGuard]},
+      {path: 'proyectos/:idProyecto/personajes/:idPersonaje/audios', component: AudiosComponent, canActivate:[AuthGuard]},
 
-      {path: 'proyectos', component: ProyectosComponent, canActivate:[AuthGuard]},
-      {path: 'proyectos/:idUsuario/personajes/:idProyecto/crear', component: PersonajesComponent, canActivate:[AuthGuard]},
-      {path: 'proyectos/personajes/:idProyecto/audios/:idPersonaje/crear', component: AudiosComponent, canActivate:[AuthGuard]},
+      /* usuario */
+      {path: 'usuario/registro', component: RegisterComponent},
 
     ]),
   ],

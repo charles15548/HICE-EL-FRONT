@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: (res) => {
           console.log("Response: ", res)
-          this.route.navigate(['/audios'])
+          this.route.navigate(['/proyectos'])
         },
         error: (err: HttpErrorResponse) => {
           this.alertaError()
