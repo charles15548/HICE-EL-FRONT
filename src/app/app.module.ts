@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ProductosComponent } from './components/views/productos/productos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -17,11 +16,12 @@ import { MainfooterComponent } from './components/structs/mainfooter/mainfooter.
 import { RegisterComponent } from './components/auth/register/register.component';
 import { ProyectoComponent } from './components/views/crear/proyecto/proyecto.component';
 import { ExplorarProyectosComponent } from './components/views/explorar/explorar-proyectos/explorar-proyectos.component';
+import { ExplorarPersonajesComponent } from './components/views/explorar/explorar-personajes/explorar-personajes.component';
+import { ExplorarAudiosComponent } from './components/views/explorar/explorar-audios/explorar-audios.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductosComponent,
     LoginComponent,
     AudiosComponent,
     PersonajesComponent,
@@ -31,6 +31,8 @@ import { ExplorarProyectosComponent } from './components/views/explorar/explorar
     RegisterComponent,
     ProyectoComponent,
     ExplorarProyectosComponent,
+    ExplorarPersonajesComponent,
+    ExplorarAudiosComponent,
   ],
   imports: [
     HttpClientModule,
@@ -48,8 +50,8 @@ import { ExplorarProyectosComponent } from './components/views/explorar/explorar
 
       /* vista del oyente*/ 
       {path: 'proyectos', component: ExplorarProyectosComponent, canActivate:[AuthGuard]},
-      {path: 'proyectos/personajes/:idProyecto', component: PersonajesComponent, canActivate:[AuthGuard]},
-      {path: 'proyectos/:idProyecto/personajes/:idPersonaje/audios', component: AudiosComponent, canActivate:[AuthGuard]},
+      {path: 'proyectos/personajes/:idProyecto', component: ExplorarPersonajesComponent, canActivate:[AuthGuard]},
+      {path: 'proyectos/:idProyecto/personajes/:idPersonaje/audios', component: ExplorarAudiosComponent, canActivate:[AuthGuard]},
 
       /* usuario */
       {path: 'usuario/registro', component: RegisterComponent},

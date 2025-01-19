@@ -41,7 +41,7 @@ export class ExplorarProyectosComponent implements OnInit {
          })
    }
    verPersonajes(idProyecto: number){
-     this.route.navigate(['/personajes',idProyecto])
+     this.route.navigate(['/proyectos/personajes',idProyecto])
    }
    obtenerUsuarioPorLogueado(){
      this._usuariosService.listarUsuarioLogueado()

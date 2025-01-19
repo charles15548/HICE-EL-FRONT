@@ -1,0 +1,45 @@
+
+<app-mainheader></app-mainheader>
+<div class="container">
+   
+    <div class="row p-5">
+        <div class="col-12">
+            <div class="row section-banner">
+                <div class="col-6">
+                    <h2>Listado de Audios Prueba</h2>
+                </div>
+               
+            </div>
+        </div>
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Audio</th>
+                        <th scope="col">ID Usuario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let lista of listaAudios; index as i">
+                        <th scope="row">{{i + 1}}</th>
+                        <td>{{lista.nombre}}</td>
+                        <td>{{lista.descripcion}}</td>
+                        <td>
+                            <audio controls>
+                                <source [src]="'http://localhost:8090/Archivo/Voz/'+ lista.voz" type="audio/mpeg">
+                            </audio>
+                        </td>
+                        <td>{{lista.idPersonaje}}</td>
+                       
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+
+</div>
