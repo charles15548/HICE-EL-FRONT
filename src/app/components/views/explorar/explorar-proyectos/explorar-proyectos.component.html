@@ -1,39 +1,21 @@
-
 <app-mainheader></app-mainheader>
 
-<div>
-    <table>
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th  scope="col">Nombre </th>
-                <th scope="col">Descripcion </th>
-                <th scope="col">Imagen</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let lista of listaProyectos; index as i">
-                <th>{{i+1}}</th>
-                <td>{{lista.nombre}}</td>
-                <td>{{lista.descripcion}}</td>
-                
-                <td>
-                    <img 
-                      [src]="'http://localhost:8090/Archivo/Proyecto/' + lista.imgProyecto" 
-                      alt="Imagen del proyecto" 
-                      style="width: 200px; height: auto;">
-                  </td>
-                
-                <td>
-                    <button class="btn btn-success" (click)="verPersonajes(lista.idProyecto)">
-                        Ir a Personaje
-                    </button>
-                </td>
-               
-            </tr>
-        </tbody>
-    </table>
+<div class="grid-container">
+  <div class="card" *ngFor="let lista of listaProyectos; index as i">
+    <div class="card-header">
+      <h3>{{lista.nombre}}</h3>
+    </div>
+    <div class="card-body">
+      <img 
+        [src]="'http://localhost:8090/Archivo/Proyecto/' + lista.imgProyecto" 
+        alt="Imagen del proyecto" 
+        class="card-image">
+      <p class="description">{{lista.descripcion}}</p>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-success" (click)="verPersonajes(lista.idProyecto)">
+        Ir a Personaje
+      </button>
+    </div>
+  </div>
 </div>
-
-

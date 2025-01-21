@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 import { ProyectosService } from 'src/app/services/proyectos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import Swal from 'sweetalert2';
@@ -19,17 +20,17 @@ export class ProyectoComponent implements OnInit {
   nameBoton: any
   id: number
   formData= new FormData();
-
+  idUsuarioLogueado = this._loginService.ObtenerIdUsuarioLogueado();
 
   constructor( 
     private _proyectosService: ProyectosService,
-    private _usuariosService: UsuariosService,
+    private _loginService: LoginService,
     private route: Router,){} 
 
   ngOnInit(): void {
+   
     this.initForm()
-    this.obtenerProyectos()
-    this.obtenerUsuarioPorLogueado()
+    this.obtenerProyectosPorIdUsuario()
    
   }
 
@@ -40,19 +41,12 @@ export class ProyectoComponent implements OnInit {
         })
   }
   verPersonajes(idProyecto: number){
-    this.route.navigate(['/personajes',idProyecto])
+    this.route.navigate(['proyecto',idProyecto,'personaje','crear'])
   }
-  obtenerUsuarioPorLogueado(){
-    this._usuariosService.listarUsuarioLogueado()
-    .subscribe((data)=>{
-      console.log(data.Usuario)
-    },(error)=>{
-      console.error('Error al obtener Usuario',error);
-    });
-  }
+  
 
-  obtenerProyectos(){
-    this._proyectosService.listarProyectos()
+  obtenerProyectosPorIdUsuario(){
+    this._proyectosService.listarProyectoPorIdUsuario()
     .subscribe((data)=>{
       this.listaProyectos = data.Proyecto;
       console.log(data.Proyecto)
@@ -96,13 +90,14 @@ export class ProyectoComponent implements OnInit {
     if(this.formProyecto.valid){
       let proyectoData={
         nombre: this.formProyecto.get('nombre')?.value,
-        descripcion: this.formProyecto.get('descripcion')?.value
+        descripcion: this.formProyecto.get('descripcion')?.value,
+        idUsuario: this.idUsuarioLogueado
       }
       this.formData.append('proyectoParam', JSON.stringify(proyectoData));
 
         this._proyectosService.generarProyecto(this.formData).subscribe(response=>{
           this.cerrarModal()
-          this.obtenerProyectos()
+          this.obtenerProyectosPorIdUsuario()
           this.resetForm()
           console.log('Proyecto Registrado', response);
         }, error =>{
@@ -126,12 +121,13 @@ export class ProyectoComponent implements OnInit {
       //Obtiene todo el formulario
       let audioData = {
         nombre: this.formProyecto.get('nombre')?.value,
-        descripcion: this.formProyecto.get('descripcion')?.value
+        descripcion: this.formProyecto.get('descripcion')?.value,
+        idUsuario: this.idUsuarioLogueado
       };
       this.formData.append('proyectoParam', JSON.stringify(audioData));
       this._proyectosService.editar(id,this.formData ).subscribe(response=>{
         this.cerrarModal()
-        this.obtenerProyectos()
+        this.obtenerProyectosPorIdUsuario()
         this.resetForm()
         console.log('Actualizado correctamente',response);
       },error=>{

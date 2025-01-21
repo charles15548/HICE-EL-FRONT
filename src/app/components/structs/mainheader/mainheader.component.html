@@ -11,8 +11,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/proyectos">
+                <li class="nav-item" *ngIf="Usuario">
+                    <a class="nav-link" (click)="verMisProyectos(Usuario.idUsuario)">
                         <i class="fas fa-plus-circle me-2"></i>Crear
                     </a>
                     
@@ -24,8 +24,7 @@
                                      style="width: 50px; height: 50px; border-radius: 50%; margin-left: 10px;">
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" routerLink="/usuario"> <i class="fas fa-user-circle me-2"></i>Cuenta</a></li>
-                        <li><a class="dropdown-item" routerLink="/affiliate">Afiliación</a></li>
+                        <li><a class="dropdown-item" routerLink="/usuario" > <i class="fas fa-user-circle me-2"></i>Cuenta</a></li>
                         <li><a class="dropdown-item" (click)="logout()" >
                             <i class="fas fa-sign-out-alt me-2"></i>Salir  
                         </a></li>

@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import {  ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PersonajesService } from 'src/app/services/personajes.service';
 import Swal from 'sweetalert2';
 declare var bootstrap: any;
 @Component({
-  selector: 'app-personajes',
-  templateUrl: './personajes.component.html',
-  styleUrls: ['./personajes.component.css']
+  selector: 'app-personaje',
+  templateUrl: './personaje.component.html',
+  styleUrls: ['./personaje.component.css']
 })
-export class PersonajesComponent implements OnInit {
-
-   listaPersonajes: any[] = []
+export class PersonajeComponent implements OnInit {
+ listaPersonajes: any[] = []
     formPersonaje: FormGroup
     personajeFile: File | null = null;
     title: any
@@ -39,7 +38,7 @@ export class PersonajesComponent implements OnInit {
       }
     
     verAudios(idPersonaje: number) {
-      this.route.navigate(['/proyectos', this.idProyecto,'personajes', idPersonaje,'audios']);
+      this.route.navigate(['proyecto', this.idProyecto,'personaje', idPersonaje,'audio','crear']);
     }
     obtenerPersonajes(){
       this._personajesService.listarPersonajes()
@@ -107,6 +106,7 @@ export class PersonajesComponent implements OnInit {
               this.obtenerPersonajes()
               this.resetForm()
               console.log('Proyecto Registrado', response);
+              window.location.reload();
             }, error =>{
               console.error('Error al registrar Proyecto',error);
             });
@@ -224,5 +224,5 @@ export class PersonajesComponent implements OnInit {
               })
           
             }
-    
+
 }

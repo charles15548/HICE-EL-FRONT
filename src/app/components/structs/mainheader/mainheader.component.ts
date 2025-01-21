@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import Swal from 'sweetalert2';
@@ -16,7 +16,8 @@ export class MainheaderComponent implements OnInit {
   constructor(
     private _loginService : LoginService,
     private _usuariosService: UsuariosService,
-    private router: Router
+    private route: Router,
+    private router: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -45,6 +46,10 @@ export class MainheaderComponent implements OnInit {
     });
   }
 
+  verMisProyectos(idUsuario:number){
+    this.route.navigate(['usuario',idUsuario,'proyecto','crear'])
+  }
+
   logout(){
     Swal.fire({
       position: "center",
@@ -58,7 +63,7 @@ export class MainheaderComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this._loginService.logout()
-        this.router.navigate(['login'])
+        this.route.navigate(['login'])
       }
     });
   }

@@ -8,9 +8,6 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthInterceptor } from './components/helpers/auth.interceptor';
 import { AuthGuard } from './components/helpers/auth.guard';
-import { AudiosComponent } from './components/views/audios/audios.component';
-import { PersonajesComponent } from './components/views/personajes/personajes.component';
-import { ProyectosComponent } from './components/views/proyectos/proyectos.component';
 import { MainheaderComponent } from './components/structs/mainheader/mainheader.component';
 import { MainfooterComponent } from './components/structs/mainfooter/mainfooter.component';
 import { RegisterComponent } from './components/auth/register/register.component';
@@ -18,14 +15,13 @@ import { ProyectoComponent } from './components/views/crear/proyecto/proyecto.co
 import { ExplorarProyectosComponent } from './components/views/explorar/explorar-proyectos/explorar-proyectos.component';
 import { ExplorarPersonajesComponent } from './components/views/explorar/explorar-personajes/explorar-personajes.component';
 import { ExplorarAudiosComponent } from './components/views/explorar/explorar-audios/explorar-audios.component';
+import { PersonajeComponent } from './components/views/crear/personaje/personaje.component';
+import { AudioComponent } from './components/views/crear/audio/audio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    AudiosComponent,
-    PersonajesComponent,
-    ProyectosComponent,
     MainheaderComponent,
     MainfooterComponent,
     RegisterComponent,
@@ -33,6 +29,8 @@ import { ExplorarAudiosComponent } from './components/views/explorar/explorar-au
     ExplorarProyectosComponent,
     ExplorarPersonajesComponent,
     ExplorarAudiosComponent,
+    PersonajeComponent,
+    AudioComponent,
   ],
   imports: [
     HttpClientModule,
@@ -44,9 +42,9 @@ import { ExplorarAudiosComponent } from './components/views/explorar/explorar-au
       {path: 'login', component: LoginComponent},
       {path: '', component: LoginComponent},
       /* vista del creador*/ 
-      {path: 'proyecto/:idUsuario/crear', component: ProyectoComponent, canActivate:[AuthGuard]},
-      {path: 'proyecto/:idUsuario/personaje/:idProyecto/crear', component: PersonajesComponent, canActivate:[AuthGuard]},
-      {path: 'proyecto/:idUsuario/personaje/:idProyecto/audio/:idPersonaje/crear', component: AudiosComponent, canActivate:[AuthGuard]},
+      {path: 'usuario/:idUsuario/proyecto/crear', component: ProyectoComponent, canActivate:[AuthGuard]},
+      {path: 'proyecto/:idProyecto/personaje/crear', component: PersonajeComponent, canActivate:[AuthGuard]},
+      {path: 'proyecto/:idProyecto/personaje/:idPersonaje/audio/crear', component: AudioComponent, canActivate:[AuthGuard]},
 
       /* vista del oyente*/ 
       {path: 'proyectos', component: ExplorarProyectosComponent, canActivate:[AuthGuard]},

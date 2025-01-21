@@ -27,11 +27,11 @@ export class LoginService {
       const beaberToken = headers.get('Authorization');
       const token = beaberToken.replace('Bearer ', '');
       localStorage.setItem('token', token);
-     /*
+     
       const Identifier = headers.get("Identifier");
       const IdentifierUser = Identifier?.replace('User','') || '';
       localStorage.setItem('idUsuario',IdentifierUser);
-    */
+    
       return body;
     }))
   }
@@ -39,11 +39,11 @@ export class LoginService {
  token(){
     return localStorage.getItem('token');
  }
- /*
+ 
  ObtenerIdUsuarioLogueado(){
   return localStorage.getItem('idUsuario');
  }
-  */
+  
 
  logout() {
   localStorage.removeItem('token');
