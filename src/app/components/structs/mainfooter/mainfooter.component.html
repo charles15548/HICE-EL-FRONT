@@ -1,1 +1,6 @@
-<p>mainfooter works!</p>
+<div class="footer-audio" *ngIf="currentAudio">
+  <div class="audio-container">
+    <p class="audio-title">Reproduciendo: {{ currentAudio.nombre }}</p>
+    <audio  controls autoplay  [src]="currentAudio.url">  </audio>
+  </div>
+</div>

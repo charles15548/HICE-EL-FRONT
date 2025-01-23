@@ -32,10 +32,10 @@
                         <td>{{lista.nombre}}</td>
                         <td>{{lista.descripcion}}</td>
                         <td>
-                            <audio controls>
-                                <source [src]="'http://localhost:8090/Archivo/Voz/'+ lista.voz" type="audio/mpeg">
-                            </audio>
-                        </td>
+                            <button class="btn btn-primary" (click)="reproducirAudio(lista)">
+                              Reproducir
+                            </button>
+                          </td>
                         <td>{{lista.idPersonaje}}</td>
                         <td>
                             <button type="button" class="btn btn-success" data-bs-toggle="modal"

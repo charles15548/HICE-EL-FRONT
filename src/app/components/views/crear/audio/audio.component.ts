@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AudiosService } from 'src/app/services/audios.service';
@@ -252,7 +252,12 @@ export class AudioComponent implements OnInit {
  
  
  
+   /* Footer audio */
    
+  reproducirAudio(audio: any): void {
    
+    const audioUrl = `http://localhost:8090/Archivo/Voz/${audio.voz}`;
+    this._audioService.setCurrentAudio({ nombre: audio.nombre, url: audioUrl });
+  }
 
 }

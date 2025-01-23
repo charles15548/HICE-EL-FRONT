@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -41,4 +41,48 @@ export class AudiosService {
     return this.http.delete(`${this.audios}/${id}`);
   }
     
+
+  /* Footer audio */
+  
+  private currentAudioSubject = new BehaviorSubject<any>(null);
+ // private audioElement: HTMLAudioElement;
+
+  setCurrentAudio(audio: any) {
+/*
+    if (this.audioElement && this.audioElement.src === audio.url) {
+      
+      if (this.audioElement.paused) {
+        this.audioElement.play();
+      }
+      return;
+    }
+
+    if(this.audioElement){
+      this.audioElement.pause();
+      this.audioElement.currentTime=0;
+    }
+    */
+    this.currentAudioSubject.next(audio);
+    //this.playAudio(audio.url);
+  }
+
+  getCurrentAudio() {
+    return this.currentAudioSubject.asObservable();
+  }
+ /*
+  private playAudio(url: string): void {
+    // Si no existe una instancia de audioElement, la creamos
+    if (!this.audioElement) {
+      this.audioElement = new Audio(url);
+      this.audioElement.load();  // Cargar el audio
+    } else {
+      // Si ya existe, solo actualizamos la fuente y recargamos
+      this.audioElement.src = url;
+    }
+
+    // Reproducir el audio
+    this.audioElement.play().catch((error) => {
+      console.error('Error al reproducir el audio:', error);
+    });
+  }*/
 }
